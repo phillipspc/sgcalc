@@ -13,4 +13,5 @@
 
 class Stroke < ActiveRecord::Base
   belongs_to :hole
+  has_one :round, through: :hole
 end
