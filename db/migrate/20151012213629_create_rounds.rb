@@ -4,5 +4,6 @@ class CreateRounds < ActiveRecord::Migration
       t.date :date_played
       t.timestamps
     end
+    add_index :rounds, :date_played
   end
 end
