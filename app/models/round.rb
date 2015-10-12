@@ -10,4 +10,5 @@
 
 class Round < ActiveRecord::Base
   has_many :holes
+  has_many :strokes, through: :holes
 end
