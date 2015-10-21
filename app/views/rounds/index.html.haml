@@ -1,0 +1,18 @@
+%h1 This is the Rounds#index placeholder
+
+%table.table.table-responsive.table-hover
+  %thead
+    %tr
+      %th Date Played
+      %th Date Added
+      %th Course
+      %th Total SG
+      %th Status
+  %tbody
+    - @rounds.each do |round|
+      %tr{class: "row-link" + (" danger" if round.incomplete?), data: {href: (round_path(round))}}
+        %td= round.date_played
+        %td= round.created_at.to_date.to_formatted_s
+        %td= round.course
+        %td= round.total_sg
+        %td= round.status

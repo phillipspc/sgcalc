@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151012220110) do
+ActiveRecord::Schema.define(version: 20151021220047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,8 +30,11 @@ ActiveRecord::Schema.define(version: 20151012220110) do
     t.date     "date_played"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "course"
+    t.text     "notes"
   end
 
+  add_index "rounds", ["course"], name: "index_rounds_on_course", using: :btree
   add_index "rounds", ["date_played"], name: "index_rounds_on_date_played", using: :btree
 
   create_table "strokes", force: :cascade do |t|

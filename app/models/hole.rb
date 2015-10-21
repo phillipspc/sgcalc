@@ -12,4 +12,5 @@
 class Hole < ActiveRecord::Base
   belongs_to :round
   has_many :strokes
+  accepts_nested_attributes_for :strokes
 end

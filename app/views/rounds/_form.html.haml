@@ -1,0 +1,5 @@
+= simple_form_for @round do |r|
+  = r.input :date_played, label: 'Date Played'
+  = r.input :course, label: 'Course (optional)'
+  = r.input :notes, label: 'Notes (optional)'
+  = r.button :submit
