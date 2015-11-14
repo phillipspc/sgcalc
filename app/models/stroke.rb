@@ -16,5 +16,12 @@ class Stroke < ActiveRecord::Base
   has_one :round, through: :hole
 
   validates_presence_of :start_distance, :surface, :number
-  validates_inclusion_of :surface, in: ['Tee', 'Fairway', 'Rough', 'Sands', 'Recovery', 'Green']
+  validates_inclusion_of :surface, in: ['Tee', 'Fairway', 'Rough', 'Sand', 'Recovery', 'Green']
+
+  def pro_strokes
+    return nil unless start_distance && surface
+    surfaces = {'Tee' => 'T', 'Fairway' => 'F', 'Rough' => 'R', 'Sand' => 'S', 'Recovery' => 'X', 'Green' => 'G'}
+    compiled = surfaces[surface] + "-" + start_distance.to_s
+    Sgcalc::SGDATA[compiled]
+  end
 end
