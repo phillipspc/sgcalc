@@ -1,0 +1,14 @@
+!!!
+%html
+%head
+  %title Strokes Gained Calculator
+  = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+  = javascript_include_tag 'jquery', 'application', 'data-turbolinks-track' => true
+  = csrf_meta_tags
+%body
+  %nav.navbar.navbar-inverse
+    .container
+      .navbar-header
+        = link_to "SG Calculator", root_path, class: 'navbar-brand'
+  .container
+    = yield

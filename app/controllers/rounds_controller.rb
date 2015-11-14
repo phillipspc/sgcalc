@@ -15,7 +15,7 @@ class RoundsController < ApplicationController
   def create
     @round = Round.new(round_params)
     if @round.save
-      redirect_to rounds_path
+      redirect_to round_path(@round)
     else
       render 'new'
     end
@@ -32,7 +32,7 @@ class RoundsController < ApplicationController
 
   private
   def round_params
-    params.require(:round).permit(:id, :date_played, :course, :notes, holes_attributes: [:id, :round_id, :number, strokes_attributes: [:id, :hole_id, :distance_out, :lie, :number]])
+    params.require(:round).permit(:id, :date_played, :course, :notes)
   end
 
   def find_round

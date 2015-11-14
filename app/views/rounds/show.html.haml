@@ -1,1 +1,6 @@
-%h1 Placeholder for Round#show
+%h2= @round.date_played.to_formatted_s
+%p= @round.course
+%p= @round.notes
+
+- @round.holes.each do |hole|
+  %h3= hole.number
