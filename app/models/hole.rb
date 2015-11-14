@@ -13,4 +13,10 @@ class Hole < ActiveRecord::Base
   belongs_to :round
   has_many :strokes
   accepts_nested_attributes_for :strokes
+
+  validates_presence_of :number
+
+  def incomplete?
+    strokes.count == 0
+  end
 end

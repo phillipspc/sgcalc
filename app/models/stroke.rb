@@ -14,4 +14,7 @@
 class Stroke < ActiveRecord::Base
   belongs_to :hole
   has_one :round, through: :hole
+
+  validates_presence_of :start_distance, :surface, :number
+  validates_inclusion_of :surface, in: ['Tee', 'Fairway', 'Rough', 'Sands', 'Recovery', 'Green']
 end

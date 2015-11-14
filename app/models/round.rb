@@ -13,7 +13,7 @@
 class Round < ActiveRecord::Base
   has_many :holes
   has_many :strokes, through: :holes
-
+  
   accepts_nested_attributes_for :holes
 
   after_create :add_holes
@@ -36,7 +36,7 @@ class Round < ActiveRecord::Base
   end
 
   def incomplete?
-    holes.any? {|hole| hole.strokes.count == 0}
+    holes.any? {|hole| hole.incomplete?}
   end
 
   def total_sg

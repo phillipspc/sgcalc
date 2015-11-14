@@ -1,5 +1,5 @@
-%h1{ style: 'float: left;' } All Rounds
-= button_to "Add New Round", new_round_path, method: :get, class: 'btn btn-primary', style: 'float: right; margin-top: 25px;'
+%h1.col-xs-8.col-sm-9 All Rounds
+= button_to "Add New Round", new_round_path, method: :get, class: 'btn btn-primary col-xs-4 col-sm-3', style: 'margin-top: 25px'
 
 %table.table.table-responsive.table-hover
   %thead
@@ -11,7 +11,8 @@
       %th Status
   %tbody
     - @rounds.each do |round|
-      %tr{class: "row-link" + (" danger" if round.incomplete?), data: {href: (round_path(round))}}
+      - round_classes = ['row-link', ('danger' if round.incomplete?)]
+      %tr{ class: round_classes, data: {href: (round_path(round))}}
         %td= round.date_played
         %td= round.created_at.to_date.to_formatted_s
         %td= round.course

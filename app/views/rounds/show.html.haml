@@ -3,4 +3,22 @@
 %p= @round.notes
 
 - @round.holes.each do |hole|
-  %h3= hole.number
+  %h3.text-left= ("Hole " + hole.number.to_s)
+  %table.table.table-responsive.table-hover
+    %thead
+      %tr
+        %th #
+        %th Start Distance
+        %th Surface
+        %th Penalty?
+        %th PGA Strokes
+        %th Strokes Gained
+    %tbody
+      - hole.strokes.each do |stroke|
+        %tr
+          %td= stroke.number
+          %td= stroke.start_distance
+          %td= stroke.surface
+          %td
+          %td
+          %td
