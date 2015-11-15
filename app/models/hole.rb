@@ -25,4 +25,12 @@ class Hole < ActiveRecord::Base
     strokes.each {|stroke| total += stroke.strokes_gained}
     total
   end
+
+  def potential_strokes
+    strokes = []
+    ((self.strokes.last.number + 1)..10).step do |num|
+      strokes << Stroke.new(number: num, hole_id: id)
+    end
+    strokes
+  end
 end

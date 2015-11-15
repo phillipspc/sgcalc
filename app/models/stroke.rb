@@ -26,6 +26,7 @@ class Stroke < ActiveRecord::Base
   end
 
   def strokes_gained
+    return nil unless start_distance && surface
     return pro_strokes - 1 if last?
     pro_strokes - 1 - next_stroke.pro_strokes
   end

@@ -24,3 +24,11 @@
           %td
           %td= stroke.pro_strokes
           %td= stroke.strokes_gained
+      - hole.potential_strokes.each do |stroke|
+        %tr
+          %td= stroke.number
+          %td= stroke.start_distance
+          %td= stroke.surface
+          %td
+          %td= stroke.pro_strokes
+          %td= stroke.strokes_gained
