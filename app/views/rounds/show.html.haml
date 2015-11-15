@@ -2,7 +2,7 @@
 %p= @round.course
 %p= @round.notes
 
-- @round.holes.each do |hole|
+- @holes.each do |hole|
   %h3.text-left= ("Hole " + hole.number.to_s)
   %table.table.table-responsive.table-hover
     %thead
@@ -21,4 +21,4 @@
           %td= stroke.surface
           %td
           %td= stroke.pro_strokes
-          %td
+          %td= stroke.strokes_gained

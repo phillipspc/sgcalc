@@ -24,4 +24,18 @@ class Stroke < ActiveRecord::Base
     compiled = surfaces[surface] + "-" + start_distance.to_s
     Sgcalc::SGDATA[compiled]
   end
+
+  def strokes_gained
+    return pro_strokes - 1 if last?
+    pro_strokes - 1 - next_stroke.pro_strokes
+  end
+
+  def last?
+    self == hole.strokes.last
+  end
+
+  def next_stroke
+    return nil if last?
+    hole.strokes.where("number = ? + 1", number).first
+  end
 end

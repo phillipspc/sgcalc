@@ -11,7 +11,7 @@
 
 class Hole < ActiveRecord::Base
   belongs_to :round
-  has_many :strokes
+  has_many :strokes, -> { order("number ASC") }
   accepts_nested_attributes_for :strokes
 
   validates_presence_of :number

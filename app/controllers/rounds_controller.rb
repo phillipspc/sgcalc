@@ -37,6 +37,7 @@ class RoundsController < ApplicationController
 
   def find_round
     @round = Round.find(params[:id])
+    @holes = @round.holes.includes(:strokes)
   end
 
 end
