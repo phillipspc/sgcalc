@@ -19,4 +19,10 @@ class Hole < ActiveRecord::Base
   def incomplete?
     strokes.count == 0
   end
+
+  def hole_total_sg
+    total = 0
+    strokes.each {|stroke| total += stroke.strokes_gained}
+    total
+  end
 end
