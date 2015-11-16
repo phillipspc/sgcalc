@@ -8,17 +8,17 @@ class HolesController < ApplicationController
   end
 
   def new
-    @hole = Hole.new
-    @hole.strokes.build
+    # @hole = Hole.new
+    # @hole.strokes.build
   end
 
   def create
-    @hole = Hole.new(holes_params)
-    if @hole.save
-      redirect_to @hole
-    else
-      render 'new'
-    end
+    # @hole = Hole.new(holes_params)
+    # if @hole.save
+    #   redirect_to @hole
+    # else
+    #   render 'new'
+    # end
   end
 
   def edit

@@ -1,0 +1,21 @@
+%h1.text-left.float-left= "Hole " + @hole.number.to_s
+%span.float-left.glyphicon{ class: (@hole.hole_total_sg > 0 ? "glyphicon-plus" : "glyphicon-minus"), "aria-hidden" => true, style: 'margin-top: 25px; margin-left: 25px;'}
+  = @hole.hole_total_sg
+%table.table.table-responsive.table-hover
+  %thead
+    %tr
+      %th #
+      %th Start Distance
+      %th Surface
+      %th Penalty?
+      %th PGA Strokes
+      %th Strokes Gained
+  %tbody
+    - @hole.strokes.each do |stroke|
+      %tr
+        %td= stroke.number
+        %td= stroke.start_distance
+        %td= stroke.surface
+        %td
+        %td= stroke.pro_strokes
+        %td= stroke.strokes_gained

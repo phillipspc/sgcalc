@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root to: 'rounds#index'
-  resources :rounds do
-    resources :holes
-  end
+  resources :rounds
+  resources :holes
 end
