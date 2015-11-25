@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151114193112) do
+ActiveRecord::Schema.define(version: 20151125183341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20151114193112) do
     t.integer  "number",         null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "penalty"
   end
 
   add_index "strokes", ["hole_id"], name: "index_strokes_on_hole_id", using: :btree
