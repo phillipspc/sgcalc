@@ -33,4 +33,13 @@ class Hole < ActiveRecord::Base
     end
     strokes
   end
+
+  def new_stroke
+    if strokes.empty?
+      Stroke.new({hole_id: id, number: 1})
+    else
+      new_number = strokes.last.number + 1
+      Stroke.new({hole_id: id, number: new_number})
+    end
+  end
 end

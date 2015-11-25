@@ -13,7 +13,7 @@ class HolesController < ApplicationController
   end
 
   def create
-    # @hole = Hole.new(holes_params)
+    # @hole = Hole.new(hole_params)
     # if @hole.save
     #   redirect_to @hole
     # else
@@ -32,7 +32,7 @@ class HolesController < ApplicationController
 
   private
 
-  def holes_params
+  def hole_params
     params.require(:hole).permit(:id, :round_id, :number, strokes_attributes: [:id, :hole_id, :distance_out, :lie, :number])
   end
 

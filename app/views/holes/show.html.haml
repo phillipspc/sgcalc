@@ -19,3 +19,5 @@
         %td= stroke.penalty
         %td= stroke.pro_strokes
         %td= stroke.strokes_gained
+
+= button_to "Add Stroke", new_hole_stroke_path(@hole), method: :get, class: 'btn btn-primary col-xs-4 col-sm-3'
