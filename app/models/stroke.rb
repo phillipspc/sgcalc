@@ -9,6 +9,7 @@
 #  number         :integer          not null
 #  created_at     :datetime
 #  updated_at     :datetime
+#  penalty        :integer
 #
 
 class Stroke < ActiveRecord::Base
@@ -27,8 +28,18 @@ class Stroke < ActiveRecord::Base
 
   def strokes_gained
     return nil unless start_distance && surface
-    return pro_strokes - 1 if last?
-    pro_strokes - 1 - next_stroke.pro_strokes
+    if last?
+      if penalty.present?
+        return pro_strokes - 1 - penalty
+      else
+        return pro_strokes - 1
+      end
+    end
+    if penalty.present?
+      pro_strokes - 1 - next_stroke.pro_strokes - penalty
+    else
+      pro_strokes - 1 - next_stroke.pro_strokes
+    end
   end
 
   def last?
