@@ -10,7 +10,7 @@ Bundler.require(*Rails.groups)
 module Sgcalc
   SGDATA = {}
   if SGDATA.empty?
-    CSV.foreach('lib/sgdata.csv', row_sep: :auto) do |row|
+    CSV.foreach('lib/SGData.csv', row_sep: :auto) do |row|
       SGDATA[row[0]] = row[1].to_f
     end
   end
