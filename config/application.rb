@@ -1,7 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-require 'CSV'
+require 'csv'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -10,7 +10,7 @@ Bundler.require(*Rails.groups)
 module Sgcalc
   SGDATA = {}
   if SGDATA.empty?
-    CSV.foreach('lib/SGData.csv', row_sep: :auto) do |row|
+    CSV.foreach('lib/sgdata.csv', row_sep: :auto) do |row|
       SGDATA[row[0]] = row[1].to_f
     end
   end
