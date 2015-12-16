@@ -3,11 +3,10 @@
 %p= @round.notes
 
 - @holes.each do |hole|
-  %h3.text-left.float-left
+  %h3
     = link_to ("Hole " + hole.number.to_s), hole_path(hole)
-  %span.float-left.glyphicon{ class: (hole.hole_total_sg > 0 ? "glyphicon-plus" : "glyphicon-minus"), "aria-hidden" => true, style: 'margin-top: 25px; margin-left: 25px;'}
-    = hole.hole_total_sg
-  %table.table.table-responsive.table-hover
+    = hole.hole_total_sg.round(3)
+  %table.table.table-responsive.table-hover.table-condensed
     %thead
       %tr
         %th #
@@ -23,5 +22,5 @@
           %td= stroke.start_distance
           %td= stroke.surface
           %td= stroke.penalty
-          %td= stroke.pro_strokes
-          %td= stroke.strokes_gained
+          %td= stroke.pro_strokes.round(3)
+          %td= stroke.strokes_gained.round(3)
