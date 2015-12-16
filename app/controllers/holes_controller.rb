@@ -1,30 +1,15 @@
 class HolesController < ApplicationController
-  before_action :find_hole, only: [:show, :edit, :update, :destroy]
-  def index
-    @holes = Hole.all
-  end
+  before_action :find_hole, only: [:show, :update, :destroy]
 
   def show
   end
 
-  def new
-    # @hole = Hole.new
-    # @hole.strokes.build
-  end
-
-  def create
-    # @hole = Hole.new(hole_params)
-    # if @hole.save
-    #   redirect_to @hole
-    # else
-    #   render 'new'
-    # end
-  end
-
-  def edit
-  end
-
   def update
+    if @hole.update(hole_params)
+      redirect_to @hole
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy
@@ -33,7 +18,7 @@ class HolesController < ApplicationController
   private
 
   def hole_params
-    params.require(:hole).permit(:id, :round_id, :number, strokes_attributes: [:id, :hole_id, :distance_out, :lie, :number])
+    params.require(:hole).permit(:id, :round_id, :number, strokes_attributes: [:id, :hole_id, :start_distance, :surface, :number, :penalty])
   end
 
   def find_hole

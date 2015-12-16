@@ -1,23 +1,42 @@
 %h1.text-left.float-left= "Hole " + @hole.number.to_s
 %span.float-left.glyphicon{ class: (@hole.hole_total_sg > 0 ? "glyphicon-plus" : "glyphicon-minus"), "aria-hidden" => true, style: 'margin-top: 25px; margin-left: 25px;'}
   = @hole.hole_total_sg
-%table.table.table-responsive.table-hover
-  %thead
-    %tr
-      %th #
-      %th Start Distance
-      %th Surface
-      %th Penalty
-      %th PGA Strokes
-      %th Strokes Gained
-  %tbody
-    - @hole.strokes.each do |stroke|
+= simple_nested_form_for @hole do |f|
+  %table.table.table-responsive.table-hover#1
+    %thead
       %tr
-        %td= stroke.number
-        %td= stroke.start_distance
-        %td= stroke.surface
-        %td= stroke.penalty
-        %td= stroke.pro_strokes
-        %td= stroke.strokes_gained
+        %th #
+        %th Start Distance
+        %th Surface
+        %th Penalty
+        %th PGA Strokes
+        %th Strokes Gained
+    %tbody
+      - @hole.strokes.each do |stroke|
+        %tr
+          %td= stroke.number
+          %td= stroke.start_distance
+          %td= stroke.surface
+          %td= stroke.penalty
+          %td= stroke.pro_strokes
+          %td= stroke.strokes_gained
+      = f.fields_for :strokes, wrapper: false do |s|
+        - unless s.object.persisted?
+          %tr.fields
+            %td= s.input :number
+            %td= s.input :start_distance, label: 'Start Distance'
+            %td= s.input :surface, label: 'Surface', collection: ['Tee', 'Fairway', 'Rough', 'Sand', 'Recovery', 'Green']
+            %td= s.input :penalty, label: 'Penalty'
+            %td= s.link_to_remove "Remove", id: "remove"
+            %td= f.submit "Save"
+  %br
+  = f.link_to_add "Add a stroke", :strokes, data: {target: "#1"}
 
-= button_to "Add Stroke", new_hole_stroke_path(@hole), method: :get, class: 'btn btn-primary col-xs-4 col-sm-3'
+:javascript
+  $(document).on('nested:fieldAdded', function(event) {
+    $('.add_nested_fields').hide();
+  })
+
+  $(document).on('nested:fieldRemoved', function(event) {
+    $('.add_nested_fields').show();
+  })

@@ -12,7 +12,7 @@
 class Hole < ActiveRecord::Base
   belongs_to :round
   has_many :strokes, -> { order("number ASC") }
-  accepts_nested_attributes_for :strokes
+  accepts_nested_attributes_for :strokes, allow_destroy: true
 
   validates_presence_of :number
 
@@ -26,20 +26,4 @@ class Hole < ActiveRecord::Base
     total
   end
 
-  def potential_strokes
-    strokes = []
-    ((self.strokes.last.number + 1)..10).step do |num|
-      strokes << Stroke.new(number: num, hole_id: id)
-    end
-    strokes
-  end
-
-  def new_stroke
-    if strokes.empty?
-      Stroke.new({hole_id: id, number: 1})
-    else
-      new_number = strokes.last.number + 1
-      Stroke.new({hole_id: id, number: new_number})
-    end
-  end
 end

@@ -1,9 +1,0 @@
-%h1 Add New Stroke
-
-= simple_form_for [@hole, @stroke] do |s|
-  = s.hidden_field :hole_id, value: @stroke.hole_id
-  = s.hidden_field :number, value: @stroke.number
-  = s.input :start_distance, label: 'Start Distance'
-  = s.input :surface, label: 'Surface', collection: ['Tee', 'Fairway', 'Rough', 'Sand', 'Recovery', 'Green']
-  = s.input :penalty, label: 'Penalty'
-  = s.button :submit
