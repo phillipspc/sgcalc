@@ -1,5 +1,7 @@
-= link_to "Back to Round", round_path(@hole.round)
-%h1= "Hole " + @hole.number.to_s
+= link_to "Back to Round", @hole.round
+%h1
+  = "Hole " + @hole.number.to_s
+  = link_to "(edit)", edit_hole_path(@hole) if @hole.strokes.count > 0
 = simple_nested_form_for @hole do |f|
   %table.table.table-responsive.table-hover
     %thead
@@ -11,23 +13,24 @@
         %th.col-xs-2 PGA Strokes
         %th.col-xs-3 Strokes Gained
     %tbody
-      - @hole.strokes.each do |stroke|
-        %tr
-          %td= stroke.number
-          %td= stroke.start_distance
-          %td= stroke.surface
-          %td= stroke.penalty
-          %td= stroke.pro_strokes.round(3)
-          %td= stroke.strokes_gained.round(3)
+      - unless @hole.strokes.count == 0
+        - @hole.strokes.each do |stroke|
+          %tr
+            %td= stroke.number
+            %td= stroke.start_distance
+            %td= stroke.surface
+            %td= stroke.penalty
+            %td= stroke.pro_strokes.round(3)
+            %td= stroke.strokes_gained.round(3)
       = f.fields_for :strokes, wrapper: false do |s|
         - unless s.object.persisted?
           %tr.fields
-            %td= s.input :number, label: false, input_html: { value: (@hole.strokes.last.number + 1) }, disabled: true
+            %td= s.input :number, label: false, input_html: { value: @hole.next_number, readonly: true }
             %td= s.input :start_distance, label: false
             %td= s.input :surface, collection: ['Tee', 'Fairway', 'Rough', 'Sand', 'Recovery', 'Green'], label: false
             %td= s.input :penalty, label: false
             %td= s.link_to_remove "Remove", id: "remove"
-            %td= f.submit "Save"
+            %td
       %tr.final-row
         %td
         %td
@@ -36,7 +39,12 @@
         %td Total SG:
         %td= @hole.hole_total_sg.round(3).to_s
   %br
-  = f.link_to_add "Add a stroke", :strokes, data: {target: ".table"}
+  .row
+    .col-sm-2
+      = f.link_to_add "Add a stroke", :strokes, data: {target: ".table"}
+    .col-sm-8
+    .col-sm-2
+      = f.submit "Save"
 
 :javascript
   $(document).on('nested:fieldAdded', function(event) {

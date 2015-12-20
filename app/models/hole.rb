@@ -15,6 +15,7 @@ class Hole < ActiveRecord::Base
   accepts_nested_attributes_for :strokes, allow_destroy: true
 
   validates_presence_of :number
+  after_save :fix_stroke_numbers
 
   def incomplete?
     strokes.count == 0
@@ -26,4 +27,15 @@ class Hole < ActiveRecord::Base
     total
   end
 
+  def next_number
+    return 1 unless strokes.count > 0
+    strokes.last.number + 1
+  end
+
+  def fix_stroke_numbers
+    strokes.each_with_index do |stroke, idx|
+      stroke.number = idx + 1
+      stroke.save!
+    end
+  end
 end
