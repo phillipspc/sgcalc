@@ -2,7 +2,7 @@ class RoundsController < ApplicationController
   before_action :find_round, only: [:show, :edit, :update, :destroy]
 
   def index
-    @rounds = Round.all
+    @rounds = Round.all.includes(:holes).includes(:strokes)
   end
 
   def show

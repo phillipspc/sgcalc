@@ -18,6 +18,21 @@ class Round < ActiveRecord::Base
 
   after_create :add_holes
 
+  def incomplete?
+    holes.any? {|hole| hole.incomplete?}
+  end
+
+  def total_sg
+    return "N/A" if incomplete?
+    holes.inject(0) { |sum, h| sum + h.total_sg }
+  end
+
+  def status
+    incomplete? ? "incomplete" : "complete"
+  end
+
+  private
+
   def add_holes
     18.times do |i|
       hole = Hole.new(number: i+1, round_id: id)
@@ -25,25 +40,4 @@ class Round < ActiveRecord::Base
     end
   end
 
-  def next_hole
-    holes.each do |hole|
-      if hole.strokes.count == 0
-        return hole
-      else
-        next
-      end
-    end
-  end
-
-  def incomplete?
-    holes.any? {|hole| hole.incomplete?}
-  end
-
-  def total_sg
-    "N/A" if incomplete?
-  end
-
-  def status
-    incomplete? ? "incomplete" : "complete"
-  end
 end

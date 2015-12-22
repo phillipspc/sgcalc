@@ -21,10 +21,8 @@ class Hole < ActiveRecord::Base
     strokes.count == 0
   end
 
-  def hole_total_sg
-    total = 0
-    strokes.each {|stroke| total += stroke.strokes_gained}
-    total
+  def total_sg
+    strokes.inject(0) {|sum, s| sum + s.strokes_gained}
   end
 
   def next_number

@@ -39,15 +39,15 @@
               %td= s.input :start_distance, label: false
               %td= s.input :surface, collection: ['Tee', 'Fairway', 'Rough', 'Sand', 'Recovery', 'Green'], label: false
               %td= s.input :penalty, label: false
-              %td.text-center= s.link_to_remove "Remove", id: "remove", class: 'btn btn-danger', role: 'button'
-              %td.text-center= f.submit "Save", class: 'btn btn-primary', id: 'save'
+              %td= s.link_to_remove "Remove", id: "remove", class: 'btn btn-danger', role: 'button'
+              %td= f.submit "Save", class: 'btn btn-primary', id: 'save'
         %tr.final-row
           %td
           %td
           %td
           %td
           %td Total SG:
-          %td= @hole.hole_total_sg.round(3).to_s
+          %td= @hole.total_sg.round(3).to_s
   .row
     .col-sm-2
       = f.link_to_add "Add a stroke", :strokes, data: {target: ".table"}, class: 'btn btn-primary', role: 'button'

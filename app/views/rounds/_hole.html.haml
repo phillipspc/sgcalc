@@ -4,7 +4,7 @@
       .col-xs-9
         = link_to ("#" + hole.number.to_s), hole_path(hole)
       .col-xs-3
-        = hole.hole_total_sg.round(3)
+        = hole.total_sg.round(3)
   %table.table.table-responsive.table-hover.table-condensed
     %thead
       %tr
