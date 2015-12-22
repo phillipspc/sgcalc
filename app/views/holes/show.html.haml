@@ -3,12 +3,16 @@
   .panel.panel-default
     .panel-heading
       .row
-        .col-sm-1
-        .col-sm-10
+        .col-sm-2.text-center
+          %a.btn{ href: hole_path(@hole.previous)}
+            %span.glyphicon.glyphicon-menu-left{ 'aria-hidden' => true }
+        .col-sm-8
           %h2.text-center
             = "Hole " + @hole.number.to_s
             = link_to "(edit)", edit_hole_path(@hole) if @hole.strokes.count > 0
-        .col-sm-1
+        .col-sm-2.text-center
+          %a.btn{ href: hole_path(@hole.next)}
+            %span.glyphicon.glyphicon-menu-right{ 'aria-hidden' => true }
     %table.table.table-responsive.table-hover
       %thead
         %tr
@@ -35,8 +39,8 @@
               %td= s.input :start_distance, label: false
               %td= s.input :surface, collection: ['Tee', 'Fairway', 'Rough', 'Sand', 'Recovery', 'Green'], label: false
               %td= s.input :penalty, label: false
-              %td= s.link_to_remove "Remove", id: "remove", class: 'btn btn-danger', role: 'button'
-              %td= f.submit "Save", class: 'btn btn-primary', id: 'save'
+              %td.text-center= s.link_to_remove "Remove", id: "remove", class: 'btn btn-danger', role: 'button'
+              %td.text-center= f.submit "Save", class: 'btn btn-primary', id: 'save'
         %tr.final-row
           %td
           %td

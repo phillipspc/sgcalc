@@ -11,9 +11,9 @@
 #
 
 class Round < ActiveRecord::Base
-  has_many :holes
+  has_many :holes, -> { order("number ASC") }
   has_many :strokes, through: :holes
-  
+
   accepts_nested_attributes_for :holes
 
   after_create :add_holes

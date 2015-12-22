@@ -38,4 +38,12 @@ class Hole < ActiveRecord::Base
       stroke.save!
     end
   end
+
+  def previous
+    self == round.holes.first ? round.holes.last : round.holes[number - 2]
+  end
+
+  def next
+    self == round.holes.last ? round.holes.first : round.holes[number]
+  end
 end

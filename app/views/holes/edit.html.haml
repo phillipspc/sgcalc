@@ -3,8 +3,16 @@
 = simple_nested_form_for @hole do |f|
   .panel.panel-default
     .panel-heading
-      %h2.text-center
-        = "Edit Hole " + @hole.number.to_s
+      .row
+        .col-sm-2.text-center
+          %a.btn{ href: hole_path(@hole.previous)}
+            %span.glyphicon.glyphicon-menu-left{ 'aria-hidden' => true }
+        .col-sm-8
+          %h2.text-center
+            = "Edit Hole " + @hole.number.to_s
+        .col-sm-2.text-center
+          %a.btn{ href: edit_hole_path(@hole.next)}
+            %span.glyphicon.glyphicon-menu-right{ 'aria-hidden' => true }
     %table.table.table-responsive.table-hover
       %thead
         %tr
