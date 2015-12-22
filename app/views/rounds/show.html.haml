@@ -1,15 +1,16 @@
-%h2= (@round.date_played.to_formatted_s if @round.date_played)
+%h2= (@round.date_played.to_formatted_s(:long) if @round.date_played)
 %p= @round.course
 %p= @round.notes
+= render partial: 'stats'
 
 .row
   .col-md-6
-    %h2.front9 Front 9
+    %h2.front9.text-center Front 9
     - @holes.each do |hole|
       - if hole.number < 10
         = render partial: 'hole', locals: { hole: hole }
   .col-md-6
-    %h2.back9 Back 9
+    %h2.back9.text-center Back 9
     - @holes.each do |hole|
       - if hole.number >= 10
         = render partial: 'hole', locals: { hole: hole }

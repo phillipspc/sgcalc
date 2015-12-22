@@ -1,24 +1,27 @@
 = link_to "Back to Hole", @hole
-%h1= "Edit Hole " + @hole.number.to_s
+-# %h1= "Edit Hole " + @hole.number.to_s
 = simple_nested_form_for @hole do |f|
-  %table.table.table-responsive.table-hover
-    %thead
-      %tr
-        %th.col-xs-3 Start Distance
-        %th.col-xs-3 Surface
-        %th.col-xs-3 Penalty
-        %th.col-xs-3 PGA Strokes
-    %tbody
-      = f.fields_for :strokes, wrapper: false do |s|
-        %tr.fields
-          %td= s.input :start_distance, label: false
-          %td= s.input :surface, collection: ['Tee', 'Fairway', 'Rough', 'Sand', 'Recovery', 'Green'], label: false
-          %td= s.input :penalty, label: false
-          %td= s.link_to_remove "Remove", id: "remove"
-  %br
+  .panel.panel-default
+    .panel-heading
+      %h2.text-center
+        = "Edit Hole " + @hole.number.to_s
+    %table.table.table-responsive.table-hover
+      %thead
+        %tr
+          %th.col-xs-3 Start Distance
+          %th.col-xs-3 Surface
+          %th.col-xs-3 Penalty
+          %th.col-xs-3 PGA Strokes
+      %tbody
+        = f.fields_for :strokes, wrapper: false do |s|
+          %tr.fields
+            %td= s.input :start_distance, label: false
+            %td= s.input :surface, collection: ['Tee', 'Fairway', 'Rough', 'Sand', 'Recovery', 'Green'], label: false
+            %td= s.input :penalty, label: false
+            %td= s.link_to_remove "remove", id: "remove", class: 'btn btn-danger'
   .row
-    .col-sm-8
     .col-sm-2
       = link_to "Cancel", @hole
+    .col-sm-8
     .col-sm-2
-      = f.submit "Save"
+      = f.submit "Save", class: 'btn btn-primary btn-block'

@@ -1,52 +1,56 @@
 = link_to "Back to Round", @hole.round
-%h1
-  = "Hole " + @hole.number.to_s
-  = link_to "(edit)", edit_hole_path(@hole) if @hole.strokes.count > 0
 = simple_nested_form_for @hole do |f|
-  %table.table.table-responsive.table-hover
-    %thead
-      %tr
-        %th.col-xs-1 #
-        %th.col-xs-2 Start Distance
-        %th.col-xs-2 Surface
-        %th.col-xs-2 Penalty
-        %th.col-xs-2 PGA Strokes
-        %th.col-xs-3 Strokes Gained
-    %tbody
-      - unless @hole.strokes.count == 0
-        - @hole.strokes.each do |stroke|
-          %tr
-            %td= stroke.number
-            %td= stroke.start_distance
-            %td= stroke.surface
-            %td= stroke.penalty
-            %td= stroke.pro_strokes.round(3)
-            %td= stroke.strokes_gained.round(3)
-      = f.fields_for :strokes, wrapper: false do |s|
-        - unless s.object.persisted?
-          %tr.fields
-            %td= s.input :number, label: false, input_html: { value: @hole.next_number, readonly: true }
-            %td= s.input :start_distance, label: false
-            %td= s.input :surface, collection: ['Tee', 'Fairway', 'Rough', 'Sand', 'Recovery', 'Green'], label: false
-            %td= s.input :penalty, label: false
-            %td= s.link_to_remove "Remove", id: "remove"
-            %td
-      %tr.final-row
-        %td
-        %td
-        %td
-        %td
-        %td Total SG:
-        %td= @hole.hole_total_sg.round(3).to_s
-  %br
+  .panel.panel-default
+    .panel-heading
+      .row
+        .col-sm-1
+        .col-sm-10
+          %h2.text-center
+            = "Hole " + @hole.number.to_s
+            = link_to "(edit)", edit_hole_path(@hole) if @hole.strokes.count > 0
+        .col-sm-1
+    %table.table.table-responsive.table-hover
+      %thead
+        %tr
+          %th.col-xs-1 #
+          %th.col-xs-2 Start Distance
+          %th.col-xs-2 Surface
+          %th.col-xs-2 Penalty
+          %th.col-xs-2 PGA Strokes
+          %th.col-xs-3 Strokes Gained
+      %tbody
+        - unless @hole.strokes.count == 0
+          - @hole.strokes.each do |stroke|
+            %tr
+              %td= stroke.number
+              %td= stroke.start_distance
+              %td= stroke.surface
+              %td= stroke.penalty
+              %td= stroke.pro_strokes.round(3)
+              %td= stroke.strokes_gained.round(3)
+        = f.fields_for :strokes, wrapper: false do |s|
+          - unless s.object.persisted?
+            %tr.fields
+              %td= s.input :number, label: false, input_html: { value: @hole.next_number, readonly: true }
+              %td= s.input :start_distance, label: false
+              %td= s.input :surface, collection: ['Tee', 'Fairway', 'Rough', 'Sand', 'Recovery', 'Green'], label: false
+              %td= s.input :penalty, label: false
+              %td= s.link_to_remove "Remove", id: "remove", class: 'btn btn-danger', role: 'button'
+              %td= f.submit "Save", class: 'btn btn-primary', id: 'save'
+        %tr.final-row
+          %td
+          %td
+          %td
+          %td
+          %td Total SG:
+          %td= @hole.hole_total_sg.round(3).to_s
   .row
     .col-sm-2
-      = f.link_to_add "Add a stroke", :strokes, data: {target: ".table"}
-    .col-sm-8
-    .col-sm-2
-      = f.submit "Save"
+      = f.link_to_add "Add a stroke", :strokes, data: {target: ".table"}, class: 'btn btn-primary', role: 'button'
+    .col-sm-10
 
 :javascript
+  $('#save').hide();
   $(document).on('nested:fieldAdded', function(event) {
     $('.add_nested_fields').hide();
     $('.final-row').hide();
