@@ -16,5 +16,5 @@
         %td= (round.date_played.to_formatted_s if round.date_played)
         %td= round.created_at.to_date.to_formatted_s
         %td= round.course
-        %td= round.total_sg.round(3)
+        %td= round.total_sg.round(3) unless round.incomplete?
         %td= round.status
