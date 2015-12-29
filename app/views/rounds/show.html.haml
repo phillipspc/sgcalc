@@ -1,7 +1,7 @@
 %h2= (@round.date_played.to_formatted_s(:long) if @round.date_played)
 %p= @round.course
 %p= @round.notes
-= render partial: 'stats'
+= render partial: 'stats' unless @round.incomplete?
 
 .row
   .col-md-6
