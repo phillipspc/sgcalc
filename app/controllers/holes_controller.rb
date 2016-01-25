@@ -9,7 +9,8 @@ class HolesController < ApplicationController
     if @hole.save
       redirect_to @hole
     else
-      redirect_to root_path
+      flash[:error] = @hole.errors.full_messages.join(', ')
+      redirect_to @hole
     end
   end
 

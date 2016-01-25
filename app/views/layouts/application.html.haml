@@ -12,4 +12,5 @@
       .navbar-header
         = link_to "SG Calculator", root_path, class: 'navbar-brand'
   .container
+    = render partial: 'shared/error_messages'
     = yield
