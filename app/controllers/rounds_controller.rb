@@ -28,6 +28,11 @@ class RoundsController < ApplicationController
   end
 
   def destroy
+    if @round.destroy
+      redirect_to rounds_path
+    else
+      flash[:error] = @round.errors.full_messages.join(', ')
+    end
   end
 
   private
