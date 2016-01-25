@@ -1,3 +1,7 @@
 %h3 Round Summary
-%p
-  Total SG: #{@round.total_sg.round(3)}
+%ul
+  %li Total Strokes Gained: #{@round.total_sg.round(3)}
+  %li Tee Shots: #{@round.tee_shot_sg.round(3)}
+  %li Approach Shots: #{@round.approach_shot_sg.round(3)}
+  %li Short Game: #{@round.short_game_sg.round(3)}
+  %li Putts: #{@round.putting_sg.round(3)}

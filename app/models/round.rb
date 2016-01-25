@@ -31,6 +31,26 @@ class Round < ActiveRecord::Base
     incomplete? ? "incomplete" : "complete"
   end
 
+  def tee_shot_sg
+    tee_shots = strokes.where("surface = 'Tee' AND start_distance >= 270")
+    tee_shots.inject(0) {|sum, s| sum + s.strokes_gained}
+  end
+
+  def approach_shot_sg
+    approach_shots = strokes.where("surface != 'Tee' AND start_distance >= 100")
+    approach_shots.inject(0) {|sum, s| sum + s.strokes_gained}
+  end
+
+  def short_game_sg
+    short_game_shots = strokes.where("surface != 'Green' AND start_distance <= 100")
+    short_game_shots.inject(0) {|sum, s| sum + s.strokes_gained}
+  end
+
+  def putting_sg
+    putts = strokes.where("surface = 'Green'")
+    putts.inject(0) {|sum, s| sum + s.strokes_gained}
+  end
+
   private
 
   def add_holes
