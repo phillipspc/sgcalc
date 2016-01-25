@@ -5,8 +5,10 @@
   %thead
     %tr
       %th Date Played
-      %th Date Added
-      %th Course
+      %th.hidden-xs Tee Shots
+      %th.hidden-xs Approach Shots
+      %th.hidden-xs Short Game
+      %th.hidden-xs Putts
       %th Total SG
       %th Status
   %tbody
@@ -14,7 +16,9 @@
       - round_classes = ['row-link', ('danger' if round.incomplete?)]
       %tr{ class: round_classes, data: {href: (round_path(round))}}
         %td= (round.date_played.to_formatted_s if round.date_played)
-        %td= round.created_at.to_date.to_formatted_s
-        %td= round.course
-        %td= round.total_sg.round(3) unless round.incomplete?
+        %td.hidden-xs= round.tee_shot_sg
+        %td.hidden-xs= round.approach_shot_sg
+        %td.hidden-xs= round.short_game_sg
+        %td.hidden-xs= round.putting_sg
+        %td= round.total_sg
         %td= round.status

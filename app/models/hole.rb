@@ -23,7 +23,8 @@ class Hole < ActiveRecord::Base
   end
 
   def total_sg
-    strokes.inject(0) {|sum, s| sum + s.strokes_gained}
+    return "N/A" if incomplete?
+    strokes.inject(0) {|sum, s| sum + s.strokes_gained}.round(3)
   end
 
   def next_number

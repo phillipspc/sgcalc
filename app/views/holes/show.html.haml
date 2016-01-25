@@ -30,8 +30,8 @@
               %td= s.object.start_distance
               %td= s.object.surface
               %td= s.object.penalty
-              %td= s.object.pro_strokes.round(3)
-              %td= s.object.strokes_gained.round(3)
+              %td= s.object.pro_strokes
+              %td= s.object.strokes_gained
           - else
             %tr.fields
               %td
@@ -39,15 +39,17 @@
               %td= s.input :surface, collection: ['Tee', 'Fairway', 'Rough', 'Sand', 'Recovery', 'Green'], label: false
               %td= s.input :penalty, label: false
               %td= s.link_to_remove "Remove", id: "remove", class: 'btn btn-danger', role: 'button'
-              %td= f.submit "Save", class: 'btn btn-primary save-btn'
+              %td
         %tr.final-row
           %td
           %td
           %td
           %td
           %td Total SG:
-          %td= @hole.total_sg.round(3).to_s
+          %td= @hole.total_sg
   .row
     .col-sm-2
-      = f.link_to_add "Add a stroke", :strokes, data: {target: ".table"}, class: 'btn btn-primary', role: 'button'
-    .col-sm-10
+      = f.link_to_add "Add a stroke", :strokes, data: {target: ".table"}, class: 'btn btn-primary btn-block', role: 'button'
+    .col-sm-8
+    .col-sm-2
+      = f.submit "Save", class: 'btn btn-primary btn-block', id: 'save-btn'

@@ -4,7 +4,7 @@
       .col-xs-9
         = link_to ("#" + hole.number.to_s), hole_path(hole)
       .col-xs-3
-        = hole.total_sg.round(3)
+        = hole.total_sg
   %table.table.table-responsive.table-hover.table-condensed
     %thead
       %tr
@@ -21,5 +21,5 @@
           %td= stroke.start_distance
           %td= stroke.surface
           %td= stroke.penalty
-          %td= stroke.pro_strokes.round(3)
-          %td= stroke.strokes_gained.round(3)
+          %td= stroke.pro_strokes
+          %td= stroke.strokes_gained

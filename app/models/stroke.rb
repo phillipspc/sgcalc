@@ -24,7 +24,7 @@ class Stroke < ActiveRecord::Base
     return nil unless start_distance && surface
     surfaces = {'Tee' => 'T', 'Fairway' => 'F', 'Rough' => 'R', 'Sand' => 'S', 'Recovery' => 'X', 'Green' => 'G'}
     compiled = surfaces[surface] + "-" + start_distance.to_s
-    Sgcalc::SGDATA[compiled]
+    Sgcalc::SGDATA[compiled].round(3)
   end
 
   def strokes_gained
@@ -32,7 +32,7 @@ class Stroke < ActiveRecord::Base
     sg = pro_strokes - 1
     sg -= 1 if penalty.present?
     sg -= next_stroke.pro_strokes unless last?
-    return sg
+    return sg.round(3)
   end
 
   def last?

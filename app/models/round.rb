@@ -24,7 +24,7 @@ class Round < ActiveRecord::Base
 
   def total_sg
     return "N/A" if incomplete?
-    holes.inject(0) { |sum, h| sum + h.total_sg }
+    holes.inject(0) { |sum, h| sum + h.total_sg }.round(3)
   end
 
   def status
@@ -33,22 +33,26 @@ class Round < ActiveRecord::Base
 
   def tee_shot_sg
     tee_shots = strokes.where("surface = 'Tee' AND start_distance >= 270")
-    tee_shots.inject(0) {|sum, s| sum + s.strokes_gained}
+    return "N/A" if tee_shots.empty?
+    tee_shots.inject(0) {|sum, s| sum + s.strokes_gained}.round(3)
   end
 
   def approach_shot_sg
     approach_shots = strokes.where("surface != 'Tee' AND start_distance >= 100")
-    approach_shots.inject(0) {|sum, s| sum + s.strokes_gained}
+    return "N/A" if approach_shots.empty?
+    approach_shots.inject(0) {|sum, s| sum + s.strokes_gained}.round(3)
   end
 
   def short_game_sg
     short_game_shots = strokes.where("surface != 'Green' AND start_distance <= 100")
-    short_game_shots.inject(0) {|sum, s| sum + s.strokes_gained}
+    return "N/A" if short_game_shots.empty?
+    short_game_shots.inject(0) {|sum, s| sum + s.strokes_gained}.round(3)
   end
 
   def putting_sg
     putts = strokes.where("surface = 'Green'")
-    putts.inject(0) {|sum, s| sum + s.strokes_gained}
+    return "N/A" if putts.empty?
+    putts.inject(0) {|sum, s| sum + s.strokes_gained}.round(3)
   end
 
   private
