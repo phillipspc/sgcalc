@@ -1,7 +1,19 @@
-%h3 Round Summary
-%ul
-  %li Total Strokes Gained: #{@round.total_sg.round(3)}
-  %li Tee Shots: #{@round.tee_shot_sg.round(3)}
-  %li Approach Shots: #{@round.approach_shot_sg.round(3)}
-  %li Short Game: #{@round.short_game_sg.round(3)}
-  %li Putts: #{@round.putting_sg.round(3)}
+#stats.panel.panel-default
+  .panel-heading.text-center Round Summary
+  %table.table.table-responsive.table-hover.table-condensed
+    %tbody
+      %tr
+        %td Total Strokes Gained:
+        %td.get-text-color= @round.total_sg.round(3)
+      %tr
+        %td Tee Shots:
+        %td.get-text-color= @round.tee_shot_sg.round(3)
+      %tr
+        %td Approach Shots:
+        %td.get-text-color= @round.approach_shot_sg.round(3)
+      %tr
+        %td Short Game:
+        %td.get-text-color= @round.short_game_sg.round(3)
+      %tr
+        %td Putts:
+        %td.get-text-color= @round.putting_sg.round(3)

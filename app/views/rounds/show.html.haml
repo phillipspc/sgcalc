@@ -1,12 +1,14 @@
-%h2
+%h2.clearfix
   .pull-left
     = (@round.date_played.to_formatted_s(:long) if @round.date_played)
   .pull-right
     = link_to "Delete", round_path(@round), method: 'delete', data: {confirm: "Are you sure you want to delete this round?"}
-  .clearfix
-%p= @round.course
-%p= @round.notes
-= render partial: 'stats' unless @round.incomplete?
+.row
+  .col-md-6
+    %p= "Course: #{@round.course}"
+    %p= "Notes: #{@round.notes}"
+  .col-md-6
+    = render partial: 'stats' unless @round.incomplete?
 
 .row
   .col-md-6
