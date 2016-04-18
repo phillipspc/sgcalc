@@ -5,14 +5,17 @@
       %tr
         %td Total Strokes Gained:
         %td.get-text-color= @round.total_sg.round(3)
-      %tr
-        %td Tee Shots:
+      %tr{data: {toggle: "popover", content: "Tee shots from at least 270 yards", placement: "top", trigger: "focus"}}
+        %td
+          %a{href: '#'}Tee Shots:
         %td.get-text-color= @round.tee_shot_sg.round(3)
-      %tr
-        %td Approach Shots:
+      %tr{data: {toggle: "popover", content: "Non tee shots from at least 100 yards", placement: "top", trigger: "focus"}}
+        %td
+          %a{href: '#'}Approach Shots:
         %td.get-text-color= @round.approach_shot_sg.round(3)
-      %tr
-        %td Short Game:
+      %tr{data: {toggle: "popover", content: "All shots inside 100 yards", placement: "top", trigger: "focus"}}
+        %td
+          %a{href: '#'}Short Game:
         %td.get-text-color= @round.short_game_sg.round(3)
       %tr
         %td Putts:

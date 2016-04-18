@@ -9,3 +9,5 @@ $ ->
       $(el).addClass('text-danger')
 
   addStatValClass(el) for el in $('.get-text-color')
+
+  $('[data-toggle="popover"]').popover()
